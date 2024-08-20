@@ -2,8 +2,7 @@ services:
   - name: nitter
     type: web
     env: docker
-    docker:
-      image: ghcr.io/sekai-soft/nitter-self-contained
+    image: ghcr.io/sekai-soft/nitter-self-contained
     envVars:
       - key: NITTER_ACCOUNTS_FILE
         value: /nitter-data/guest_accounts.json
@@ -11,22 +10,19 @@ services:
         value: "1"
       - key: REDIS_HOST
         value: nitter-redis
-    envFilePath: .env
-    autoDeploy: true
     healthCheckPath: /
     plan: starter
+    autoDeploy: true
     persistentDisk:
       name: nitter-data
       mountPath: /nitter-data
       sizeGB: 1
-    services:
-      - name: nitter-redis
-        type: redis
-        plan: starter
-        docker:
-          image: redis:6-alpine
-        command: redis-server --save 60 1 --loglevel warning
-        persistentDisk:
-          name: nitter-redis
-          mountPath: /data
-          sizeGB: 1
+  - name: nitter-redis
+    type: redis
+    plan: starter
+    image: redis:6-alpine
+    command: redis-server --save 60 1 --loglevel warning
+    persistentDisk:
+      name: nitter-redis
+      mountPath: /data
+      sizeGB: 1
