@@ -14,4 +14,4 @@ ENV TWITTER_USERNAME=athTestAcc
 ENV TWITTER_PASSWORD=@12Sept2004
 
 # Run nitter-auth.py when the container launches
-CMD ["python", "./nitter-auth.py"]
+CMD ["python", "nitter-auth.py"]
